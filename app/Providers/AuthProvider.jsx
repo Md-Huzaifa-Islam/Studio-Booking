@@ -5,19 +5,16 @@ import {
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
-  updateProfile,
 } from "firebase/auth";
 import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
 
 import { AuthContext } from "../Contexts/Context";
-import useAuth from "../Hooks/Custom";
+import { auth } from "../Firebase/Firebase";
 
 const provider = new GoogleAuthProvider();
 
 export default function AuthProvider({ children }) {
-  const auth = useAuth();
-
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -44,14 +41,15 @@ export default function AuthProvider({ children }) {
     return signOut(auth);
   };
 
-  // observer for authentication state changes
   useEffect(() => {
-    const disconnect = onAuthStateChanged(auth, (currentUser) => {
+    // Track authentication state changes
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
       setLoading(false);
     });
-    return () => disconnect();
-  }, []); // Empty dependency array, only runs once on mount
+
+    return () => unsubscribe();
+  }, []);
 
   const values = {
     user,

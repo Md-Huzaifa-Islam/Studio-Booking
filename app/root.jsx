@@ -11,6 +11,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import stylesheet from "./app.css?url";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import AuthProvider from "./Providers/AuthProvider";
+import Navbar from "./components/Navbar";
 
 export const links = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -36,6 +37,7 @@ export function Layout({ children }) {
         <Links />
       </head>
       <body>
+        <Navbar />
         <AuthProvider>
           <QueryClientProvider client={queryClient}>
             {children}
