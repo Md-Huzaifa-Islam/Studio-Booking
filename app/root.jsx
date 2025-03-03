@@ -8,6 +8,7 @@ import {
 } from "react-router";
 
 import stylesheet from "./app.css?url";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 export const links = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -22,7 +23,7 @@ export const links = () => [
   },
   { rel: "stylesheet", href: stylesheet },
 ];
-
+const queryClient = new QueryClient();
 export function Layout({ children }) {
   return (
     <html lang="en">
@@ -33,7 +34,9 @@ export function Layout({ children }) {
         <Links />
       </head>
       <body>
-        {children}
+        <QueryClientProvider client={queryClient}>
+          {children}
+        </QueryClientProvider>
         <ScrollRestoration />
         <Scripts />
       </body>
@@ -62,11 +65,11 @@ export function ErrorBoundary({ error }) {
   }
 
   return (
-    <main className="pt-16 p-4 container mx-auto">
+    <main className="container mx-auto p-4 pt-16">
       <h1>{message}</h1>
       <p>{details}</p>
       {stack && (
-        <pre className="w-full p-4 overflow-x-auto">
+        <pre className="w-full overflow-x-auto p-4">
           <code>{stack}</code>
         </pre>
       )}
