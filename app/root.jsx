@@ -1,3 +1,4 @@
+import "react-datepicker/dist/react-datepicker.css";
 import {
   isRouteErrorResponse,
   Links,
@@ -6,11 +7,9 @@ import {
   Scripts,
   ScrollRestoration,
 } from "react-router";
-import "react-datepicker/dist/react-datepicker.css";
 
-import stylesheet from "./app.css?url";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import AuthProvider from "./Providers/AuthProvider";
+import stylesheet from "./app.css?url";
 import Navbar from "./components/Navbar";
 
 export const links = () => [
@@ -38,11 +37,10 @@ export function Layout({ children }) {
       </head>
       <body>
         <Navbar />
-        <AuthProvider>
-          <QueryClientProvider client={queryClient}>
-            {children}
-          </QueryClientProvider>
-        </AuthProvider>
+
+        <QueryClientProvider client={queryClient}>
+          {children}
+        </QueryClientProvider>
 
         <ScrollRestoration />
         <Scripts />

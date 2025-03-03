@@ -10,7 +10,7 @@ export function meta() {
 export default function Home() {
   return (
     <main>
-      <StudioContainer />
+      <p>this is for home</p>
     </main>
   );
 }
