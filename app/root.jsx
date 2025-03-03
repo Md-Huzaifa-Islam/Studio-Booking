@@ -6,9 +6,11 @@ import {
   Scripts,
   ScrollRestoration,
 } from "react-router";
+import "react-datepicker/dist/react-datepicker.css";
 
 import stylesheet from "./app.css?url";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import AuthProvider from "./Providers/AuthProvider";
 
 export const links = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -34,9 +36,12 @@ export function Layout({ children }) {
         <Links />
       </head>
       <body>
-        <QueryClientProvider client={queryClient}>
-          {children}
-        </QueryClientProvider>
+        <AuthProvider>
+          <QueryClientProvider client={queryClient}>
+            {children}
+          </QueryClientProvider>
+        </AuthProvider>
+
         <ScrollRestoration />
         <Scripts />
       </body>

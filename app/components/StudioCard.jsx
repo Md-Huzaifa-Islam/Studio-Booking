@@ -34,7 +34,7 @@ export default function StudioCard({ studio }) {
 
         {/* Booking Button */}
         <div className="card-actions justify-end">
-          <StudioModal studio={studio} />
+          <StudioModal studio={studio} id={studio.Id} />
         </div>
       </div>
     </div>

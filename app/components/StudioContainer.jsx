@@ -205,13 +205,15 @@ export default function StudioContainer() {
       </div>
 
       {/* Display the filtered studios */}
-      {filteredStudios && filteredStudios.length > 0 ? (
-        filteredStudios.map((studio) => (
-          <StudioCard key={studio.Id} studio={studio} />
-        ))
-      ) : (
-        <p>No studios found.</p>
-      )}
+      <div className="grid grid-cols-3">
+        {filteredStudios && filteredStudios.length > 0 ? (
+          filteredStudios.map((studio) => (
+            <StudioCard key={studio.Id} studio={studio} />
+          ))
+        ) : (
+          <p>No studios found.</p>
+        )}
+      </div>
     </div>
   );
 }
